@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>30 Day Reading Challenge | Banglay IELTS</title>
+<style>
+:root{--bg:#f7f6f3;--card:#fff;--ink:#17191c;--mut:#6b6f76;--line:#e2e0db;--acc:#0f766e;--bad:#b4342b}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#14161a;--card:#1c1f24;--ink:#eceef0;--mut:#969ba3;--line:#2a2e35;--acc:#5eead4;--bad:#f08a80}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;
+display:flex;align-items:center;justify-content:center;min-height:100vh}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px 26px;
+width:100%;max-width:420px;margin:20px}
+h1{font-size:21px;margin:0 0 4px;letter-spacing:-.01em}
+p.sub{color:var(--mut);font-size:14px;margin:0 0 22px}
+label{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:7px}
+input{width:100%;padding:12px 14px;font:16px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;
+letter-spacing:.08em;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:9px}
+input:focus{outline:2px solid var(--acc);outline-offset:-1px;border-color:var(--acc)}
+button{width:100%;margin-top:12px;padding:12px;font:600 15px/1 inherit;color:#fff;background:var(--acc);
+border:0;border-radius:9px;cursor:pointer}
+button:hover{filter:brightness(1.08)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) button{color:#06302c}}
+.msg{min-height:20px;margin-top:12px;font-size:13.5px;color:var(--bad)}
+.hint{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--mut);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>30 Day Reading Challenge</h1>
+<p class="sub">Enter the access code for today&rsquo;s passage.</p>
+<form id="f" autocomplete="off">
+<label for="c">Access code</label>
+<input id="c" name="c" placeholder="xxxx-xxxx-xxxx" spellcheck="false" autocapitalize="off" autocorrect="off" required>
+<button type="submit">Open passage</button>
+</form>
+<p class="msg" id="m" role="status" aria-live="polite"></p>
+<p class="hint">Your teacher gives you a new code each day. Codes are personal to your batch &mdash; please do not share them.</p>
+</div>
+<script>
+var f=document.getElementById("f"),c=document.getElementById("c"),m=document.getElementById("m");
+f.addEventListener("submit",function(e){
+  e.preventDefault();
+  var v=c.value.toLowerCase().replace(/[^a-z0-9]/g,"");
+  if(v.length!==12){m.textContent="That code doesn't look right — 12 letters and numbers.";return;}
+  var slug=v.slice(0,4)+"-"+v.slice(4,8)+"-"+v.slice(8,12);
+  m.textContent="Checking\u2026";
+  fetch(slug+".html",{method:"HEAD"}).then(function(r){
+    if(r.ok){location.href=slug+".html";}
+    else{m.textContent="No passage found for that code. Check it with your teacher.";}
+  }).catch(function(){location.href=slug+".html";});
+});
+</script>
+</body>
+</html>

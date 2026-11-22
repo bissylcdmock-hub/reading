@@ -120,6 +120,145 @@ button{font:inherit;font-size:15px;font-weight:600;border-radius:7px;cursor:poin
   .pane[hidden]{display:block!important}
   .tabs,.bar,.actions{display:none}
 }
+
+/* ===== Day01 enhanced student interface — standalone, no external assets ===== */
+:root{--sans:Arial,Helvetica,sans-serif;--serif:Arial,Helvetica,sans-serif;--zoom:1;--passage-width:50%;color-scheme:light}
+body,button,input,textarea,select{font-family:Arial,Helvetica,sans-serif}
+body{min-width:280px}
+body.dark{color-scheme:dark;--ink:#F4F5F7;--muted:#B6B6C4;--rule:#363744;--paper:#1A1C25;--ground:#11131B;--brand:#F04B68;--brand-dark:#FF9DAE;--brand-tint:#2B1D2A;--brand-soft:#593342}
+.mast .in{gap:12px}
+.brandline{flex:1 1 250px;min-width:120px}
+.mast h1{font-family:Arial,Helvetica,sans-serif}
+.mast .meta{flex:0 0 auto}
+.header-tools{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex:0 0 auto;flex-wrap:wrap}
+.tool-btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:36px;min-width:36px;padding:6px 9px;background:var(--paper);border:1px solid var(--rule);color:var(--ink);font-size:14px;font-weight:700;border-radius:8px}
+.tool-btn:hover,.tool-btn:focus-visible{background:var(--brand-tint);outline-color:var(--brand)}
+.tool-btn svg{width:19px;height:19px;display:block;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.tool-btn #theme-symbol{font-size:19px;line-height:1}
+#timer-button{min-width:92px;font-variant-numeric:tabular-nums}
+.timer-area{position:relative}
+.timer-panel{position:absolute;right:0;top:calc(100% + 9px);width:245px;max-width:calc(100vw - 28px);padding:15px;background:var(--paper);color:var(--ink);border:1px solid var(--rule);box-shadow:0 12px 38px #0003;border-radius:11px;z-index:60}
+.timer-panel[hidden]{display:none!important}
+.timer-panel label{font-size:12px;font-weight:700;display:block;margin-bottom:6px;color:var(--muted)}
+.timer-panel select{width:100%;padding:8px 9px;border:1px solid var(--rule);border-radius:7px;background:var(--paper);color:var(--ink);font-size:14px}
+.timer-time{text-align:center;font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;margin:10px 0 3px}
+.timer-state{text-align:center;font-size:12px;color:var(--muted);margin:0 0 13px}
+.timer-actions{display:flex;gap:8px}
+.timer-actions button{flex:1;padding:7px 5px;font-size:13px}
+.identity{background:var(--paper);border-bottom:1px solid var(--rule);padding:10px 22px;display:flex;gap:12px;align-items:end;flex-wrap:wrap;flex:0 0 auto}
+.identity label{display:flex;flex-direction:column;gap:3px;min-width:145px;flex:1 1 185px;font-size:12px;color:var(--muted);font-weight:700}
+.identity label.date-field{flex:0 1 180px;min-width:155px}
+.identity input{height:37px;width:100%;border:1px solid var(--rule);border-radius:7px;background:var(--paper);color:var(--ink);font-size:14px;padding:8px 10px;min-width:0}
+.identity input:focus{outline:2px solid var(--brand);outline-offset:1px}
+.identity input[readonly]{background:var(--ground);color:var(--muted)}
+.identity .small-hint{flex:1 1 100%;font-size:11px;color:var(--muted);margin:-3px 0 0}
+.split{grid-template-columns:minmax(0,var(--passage-width)) 10px minmax(0,1fr);min-width:0}
+.pane{min-width:0;scrollbar-gutter:stable}
+#qpane{border-left:0;background:var(--ground)}
+.divider{width:10px;background:var(--rule);position:relative;cursor:col-resize;touch-action:none;z-index:1;outline-offset:-1px}
+.divider:after{content:"";position:absolute;width:4px;height:44px;border-radius:8px;top:calc(50% - 22px);left:3px;background:var(--brand);opacity:.75}
+.divider:hover,.divider:focus-visible,.divider.dragging{background:var(--brand-soft);outline-color:var(--brand)}
+.divider:focus-visible{outline:2px solid var(--brand)}
+.pane{font-size:calc(16px * var(--zoom))}
+.passage p{font-family:Arial,Helvetica,sans-serif;font-size:calc(17px * var(--zoom));line-height:1.7}
+.qt{font-size:calc(15.5px * var(--zoom))}
+.q textarea{font-family:Arial,Helvetica,sans-serif;font-size:calc(15px * var(--zoom))}
+.q textarea:disabled{background:var(--ground);color:var(--ink);opacity:1}
+.model p{font-size:calc(15px * var(--zoom))}
+.model b{color:var(--brand-dark)}
+.note{color:var(--ink)}
+.note b{color:var(--brand-dark)}
+.count{flex:1 1 170px}
+.footer-actions{display:flex;align-items:center;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-left:auto}
+.footer-actions button{padding:9px 13px;font-size:13.5px;white-space:nowrap}
+button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+button:disabled{opacity:.58;cursor:not-allowed}
+.review-banner{border:1px solid var(--brand-soft);border-left:4px solid var(--brand);padding:12px 14px;background:var(--brand-tint);border-radius:8px;margin-bottom:17px;font-size:13px;line-height:1.55}
+.review-banner[hidden]{display:none!important}
+.review-banner strong{display:block;color:var(--brand-dark);margin-bottom:3px}
+.review-banner .review-details{overflow-wrap:anywhere}
+.extra-tools{display:flex;gap:13px;flex-wrap:wrap;margin:21px 0 0;padding-top:15px;border-top:1px solid var(--rule)}
+.extra-tools button{color:var(--muted);padding:5px 0;background:transparent;border:0;border-radius:0;font-size:12px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.extra-tools button:hover{color:var(--brand-dark)}
+#message{font-size:12px;color:var(--brand-dark);font-weight:600;min-height:0}
+body.dark .ghost:hover{background:var(--brand-tint)}
+body.dark .primary{color:#181820}
+body.dark .badge{color:var(--brand-dark)}
+@media(max-width:1200px){.mast .meta{display:none}.pane{padding:23px 22px 35px}}
+@media(max-width:900px){
+  body{height:100dvh;overflow:hidden}
+  .tabs{display:none}
+  .split{display:grid;grid-template-columns:minmax(0,var(--passage-width)) 10px minmax(0,1fr)}
+  .pane{padding:22px 17px 40px;overflow-y:auto}
+  .mast .meta{display:none}
+  .bar{padding:10px 15px}
+  .identity{padding:9px 15px}
+}
+@media(max-width:720px){
+  body{height:auto;min-height:100dvh;overflow:auto}
+  .mast .in{align-items:center;gap:9px;padding:9px 12px;flex-wrap:wrap}
+  .brandline{flex:1 1 100%;max-width:100%}
+  .mast h1{font-size:15px}
+  .header-tools{flex:1 1 100%;justify-content:flex-end}
+  .identity{padding:10px 12px;gap:8px}
+  .identity label{flex:1 1 130px;min-width:120px}
+  .identity label.date-field{flex:1 1 135px;min-width:120px}
+  .identity .small-hint{font-size:10px}
+  .tabs{display:flex}
+  .split{display:block;flex:1 1 auto}
+  .divider{display:none}
+  .pane{padding:19px 14px 30px;overflow:visible}
+  .pane[hidden]{display:none!important}
+  .bar{position:sticky;bottom:0;z-index:30;padding:9px 11px;gap:8px;box-shadow:0 -5px 14px #0000000b}
+  .count{flex:1 1 100%;font-size:12px}
+  .footer-actions{width:100%;justify-content:flex-end;gap:6px}
+  .footer-actions button{flex:1 1 auto;min-width:0;padding:10px 6px;font-size:11.5px;white-space:normal;line-height:1.25}
+}
+@media(max-width:360px){
+  .brandline img{max-width:115px;height:auto}
+  .mast h1{font-size:13px}
+  .daytag{font-size:10px}
+  #timer-button{min-width:82px}
+  .header-tools{gap:4px}
+  .tool-btn{padding:6px}
+  .identity input{font-size:13px}
+}
+@media print{
+  body,body.dark{--ink:#111;--muted:#555;--rule:#ddd;--paper:#fff;--ground:#fff;--brand:#C50C2F;--brand-dark:#8E0922;--brand-tint:#fff;--brand-soft:#eee;color:#111;background:white;display:block;height:auto;overflow:visible}
+  .header-tools,.timer-panel,.identity .small-hint,.divider,.tabs,.bar,.extra-tools{display:none!important}
+  .identity{display:flex;padding:10px 0}
+  .identity input{border:0;padding:0;height:auto}
+  .split{display:block}
+  .pane{display:block!important;overflow:visible;padding:15px 0;background:#fff!important}
+  .pane[hidden]{display:block!important}
+  .q textarea{border:0;min-height:0;height:auto;overflow:visible}
+  .review-banner{background:#fff}
+}
+
+
+
+/* Day01 v3: Cambridge-style short answers and automatic marking */
+.question-section{margin:4px 0 18px;padding:13px 15px;border:1px solid var(--brand-soft);background:var(--brand-tint);border-radius:8px}
+.question-section:not(:first-child){margin-top:30px}
+.question-section h3{font-size:calc(14.5px * var(--zoom));margin:0 0 6px;color:var(--brand-dark)}
+.question-section p{font-size:calc(13px * var(--zoom));line-height:1.6;margin:0;color:var(--ink)}
+.question-section strong{color:var(--brand-dark)}
+.q textarea{min-height:44px;height:44px;max-height:44px;resize:none;line-height:1.35;overflow:hidden}
+.q textarea:disabled{cursor:default}
+.q.correct .qhead .qn{background:#16824c}
+.q.incorrect .qhead .qn{background:#b64b35}
+.q.correct textarea{border-color:#16824c}
+.q.incorrect textarea{border-color:#b64b35}
+.model.correct{border-left-color:#16824c;background:rgba(22,130,76,.07)}
+.model.incorrect{border-left-color:#b64b35;background:rgba(182,75,53,.07)}
+.model.correct b{color:#16824c}
+.model.incorrect b{color:#b64b35}
+body.dark .model.correct b{color:#8eddb5}
+body.dark .model.incorrect b{color:#ffb39b}
+.model .grading-reason{font-size:12px;opacity:.8;margin-top:3px}
+.review-banner .result-score{font-size:23px;font-weight:800;color:var(--brand-dark);margin:5px 0}
+@media(max-width:720px){.question-section{padding:12px 11px}.q textarea{font-size:calc(15px * var(--zoom))}}
+
 </style>
 </head>
 <body>
@@ -135,8 +274,39 @@ button{font:inherit;font-size:15px;font-weight:600;border-radius:7px;cursor:poin
       <span class="badge">Beginner</span>
       <span>~300 words</span>
     </div>
+    <div class="header-tools" aria-label="Reading tools">
+      <button class="tool-btn" id="zoom-in" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+      <button class="tool-btn" id="zoom-out" type="button" title="Zoom out" aria-label="Zoom out">−</button>
+      <button class="tool-btn" id="theme-toggle" type="button" title="Switch light or dark mode" aria-label="Toggle light and dark mode"><span id="theme-symbol" aria-hidden="true">☾</span></button>
+      <div class="timer-area" id="timer-area">
+        <button class="tool-btn" id="timer-button" type="button" aria-label="Open stopwatch or countdown" aria-controls="timer-panel" aria-expanded="false" title="Stopwatch / Timer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6M12 2v3M18.5 6.5l1.5-1.5"/></svg>
+          <span id="timer-chip">00:00</span>
+        </button>
+        <div class="timer-panel" id="timer-panel" hidden>
+          <label for="timer-mode">Timer mode</label>
+          <select id="timer-mode">
+            <option value="0">Stopwatch</option>
+            <option value="600">10-minute countdown</option>
+            <option value="1200">20-minute countdown</option>
+            <option value="1800">30-minute countdown</option>
+            <option value="3600">60-minute countdown</option>
+          </select>
+          <div id="timer-large" class="timer-time" aria-live="off">00:00</div>
+          <p id="timer-state" class="timer-state">Paused</p>
+          <div class="timer-actions"><button id="timer-start" type="button" class="primary">Start</button><button id="timer-reset" type="button" class="ghost">Reset</button></div>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
+
+<div class="identity" aria-label="Student information">
+  <label for="student-name">Student Name<input type="text" id="student-name" placeholder="Enter your full name" autocomplete="name" maxlength="120" required></label>
+  <label for="student-batch">Batch<input type="text" id="student-batch" placeholder="Enter your batch" maxlength="80" required></label>
+  <label for="submission-date" class="date-field">Submission Date<input type="date" id="submission-date" readonly title="Automatically recorded on submission"></label>
+  <p class="small-hint">Name and batch will appear in the submitted review and JPG result. The date is recorded automatically.</p>
+</div>
 
 <nav class="tabs" role="tablist">
   <button role="tab" id="tab-p" aria-controls="psg" aria-selected="true">Passage</button>
@@ -158,195 +328,363 @@ button{font:inherit;font-size:15px;font-weight:600;border-radius:7px;cursor:poin
     <p>Aisha enjoys market day because she gets to spend time with her mother, see familiar faces, and sometimes get a small treat. She is already looking forward to next Friday.</p>
   </section>
 
+  <div id="split-divider" class="divider" role="separator" aria-orientation="vertical" aria-label="Resize passage and question columns" aria-valuemin="28" aria-valuemax="72" aria-valuenow="50" tabindex="0" title="Drag to resize, or use arrow keys"></div>
+
   <section class="pane" id="qpane">
     <div class="panehead">
       <h2>Questions 1&ndash;10</h2>
-      <span>answer in your own words</span>
+      <span>Cambridge-style · 1 mark each</span>
     </div>
-    <div id="qs" data-k="h9+TiG3Z5IXQwA6GJM0YtZaO5sHzrZCS77Kvz8TxNQyVid6KIZzYwuLTBY4gxxT0lpPw27HimZCu5+adlZlnUb2RgcV3mNzE88IT2GXWSrGRnqzR/Kmajriw6puD2jRV3Imd0yTVn8/32xXCJthRpIPUqpGx4t294fbxioOXNxCZnpeKOJ+fweTHDpZrlBCAn57iyqfintyy/eKDipcoC52Tlc950J2LtpAlm2XYV7ubk+3UvaOL3Kjk8M+DziIK3JyczneK0sL63g6MIpRRoNCZ4sH4pIqQremtzcqXZTuZnpPfJJyf1P7XR4Yq0Uv0npX3k/GrlJnh5OuKxsQqHJCR0sUx2cvP85IBizbcGKeEm+/fs+DT3OPS8YaB3zNZhZiexjiOn8b41keQINAW9tzaofH4oZ6JsvWjro/ELxjclZPOd5vawviSD4cpxF6hnNr32/y234uk9ejPyZcvGJjdms87idrDttELhyTaGKCYn6Pb8reMmeH19YqUzmcdnYTciHvZneX6xwLMZ5gY9rHa79z8pN+Tp7D0jpTaZxuOmJPOeduTh7TzDpEt1R+n0Jbqx+mumtyj4uybjtI1V96g3op1np2dtpAmgSbRSKDQm+3KvaORj7b18c+S3yYN3J6T2iOMzcLlkhOKIJRLtZ2fo974o5GVr/etz6TFJhqXmIbPM9ney+LXFYwkwFGilYmj0u+n35mw5eKDis5nD52Rm853i9rU5t0JkSDHFvaN">
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">1</div>
-          <p class="qt">On which day of the week does Aisha go to the market?</p>
-        </div>
-        <textarea id="a1" rows="3" spellcheck="true" aria-label="Your answer to question 1" placeholder="Your answer to question 1…"></textarea>
-      </div>
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">2</div>
-          <p class="qt">Name three things sold at the market stalls.</p>
-        </div>
-        <textarea id="a2" rows="3" spellcheck="true" aria-label="Your answer to question 2" placeholder="Your answer to question 2…"></textarea>
-      </div>
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">3</div>
-          <p class="qt">What does Mr Karim sometimes give Aisha for free?</p>
-        </div>
-        <textarea id="a3" rows="3" spellcheck="true" aria-label="Your answer to question 3" placeholder="Your answer to question 3…"></textarea>
-      </div>
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">4</div>
-          <p class="qt">How does Aisha's mother check that the fish is fresh?</p>
-        </div>
-        <textarea id="a4" rows="3" spellcheck="true" aria-label="Your answer to question 4" placeholder="Your answer to question 4…"></textarea>
-      </div>
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">5</div>
-          <p class="qt">Why does Aisha wait away from the fish stall?</p>
-        </div>
-        <textarea id="a5" rows="3" spellcheck="true" aria-label="Your answer to question 5" placeholder="Your answer to question 5…"></textarea>
-      </div>
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">6</div>
-          <p class="qt">What colours are the flowers that the flower seller arranges?</p>
-        </div>
-        <textarea id="a6" rows="3" spellcheck="true" aria-label="Your answer to question 6" placeholder="Your answer to question 6…"></textarea>
-      </div>
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">7</div>
-          <p class="qt">Why did Aisha's mother buy her a hair clip this week?</p>
-        </div>
-        <textarea id="a7" rows="3" spellcheck="true" aria-label="Your answer to question 7" placeholder="Your answer to question 7…"></textarea>
-      </div>
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">8</div>
-          <p class="qt">What colour hair clip did Aisha buy?</p>
-        </div>
-        <textarea id="a8" rows="3" spellcheck="true" aria-label="Your answer to question 8" placeholder="Your answer to question 8…"></textarea>
-      </div>
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">9</div>
-          <p class="qt">What do they buy at the bakery on the way home?</p>
-        </div>
-        <textarea id="a9" rows="3" spellcheck="true" aria-label="Your answer to question 9" placeholder="Your answer to question 9…"></textarea>
-      </div>
-      <div class="q">
-        <div class="qhead">
-          <div class="qn">10</div>
-          <p class="qt">Who is excited to see what they bought when they get home?</p>
-        </div>
-        <textarea id="a10" rows="3" spellcheck="true" aria-label="Your answer to question 10" placeholder="Your answer to question 10…"></textarea>
-      </div>
+    <div id="review-banner" class="review-banner" role="status" aria-live="polite" hidden></div>
+    <div id="qs" data-k="h9+TiG2ineHk2wODPJYU9oaf5Nbpo52QpLKvzavFZzKdj5vHddWdyOTTCYUglhT2lYPmwL/u3Yi2/6HDxMUiHd7R0N4/nJ/P+ccUh2eYGracj+aRseCdjqTx5827m2UP3sep8XWfzc7y0x7AGJhj9oaf5Nbpo52QpLLew72VKgvclpPYPpSdi7TfFcxl31mmmZehn7+pno6o/aGyyuxlFo6cnM0y2+KLzZACmyDHGoncoaHH6q3d0OOiocPEwzAW3Jub2T/bk4WkkgGLNtwaidyhocH4pt2h7cuhm47SZxGTiIHPddWdz/nHFIdn6RSP0pjvxvjgotCasuGdg9YjW9DfhsIy2d3V89MDwGmWT7WCl6PR76eemOPN3sPE0GVD3ryc2SCczdS20xWHZddQsZOR5te9o5idqP7wm8bDLxzcjZPZJJjYwriSIoMm3Bi3n4jx1v6234+p//GbxtYpCouYgIoymM3J5ZIIjCCUVbWCka2T3KyMi6Ti8M+JwSIL3Imaz3eKy8bi1wPCMttKsNCW6t70tt+OpPPmhpDSZxeT3Z/LJZKRhes=">
+<div class="question-section" role="group" aria-label="Questions 1–5 · Sentence completion"><h3>Questions 1–5 · Sentence completion</h3><p>Complete the sentences below. <strong>Write NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.</p></div>
+<div class="q"><div class="qhead"><div class="qn">1</div><p class="qt">Aisha visits the market every ______ afternoon.</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 1" id="a1" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
+<div class="q"><div class="qhead"><div class="qn">2</div><p class="qt">Her mother starts shopping at the ______ stall.</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 2" id="a2" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
+<div class="q"><div class="qhead"><div class="qn">3</div><p class="qt">The vegetable seller is called ______.</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 3" id="a3" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
+<div class="q"><div class="qhead"><div class="qn">4</div><p class="qt">Today Aisha receives a small ______ for free.</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 4" id="a4" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
+<div class="q"><div class="qhead"><div class="qn">5</div><p class="qt">Aisha&#x27;s mother checks the fish by looking at its ______.</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 5" id="a5" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
+<div class="question-section" role="group" aria-label="Questions 6–10 · Short-answer questions"><h3>Questions 6–10 · Short-answer questions</h3><p>Answer the questions below. <strong>Write NO MORE THAN TWO WORDS AND/OR A NUMBER</strong> from the passage for each answer.</p></div>
+<div class="q"><div class="qhead"><div class="qn">6</div><p class="qt">How many fish does Aisha&#x27;s mother choose for dinner?</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 6" id="a6" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
+<div class="q"><div class="qhead"><div class="qn">7</div><p class="qt">Besides yellow, what colour are the flowers?</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 7" id="a7" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
+<div class="q"><div class="qhead"><div class="qn">8</div><p class="qt">What did Aisha help clean every day this week?</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 8" id="a8" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
+<div class="q"><div class="qhead"><div class="qn">9</div><p class="qt">What colour is Aisha&#x27;s new hair clip?</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 9" id="a9" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
+<div class="q"><div class="qhead"><div class="qn">10</div><p class="qt">What does Aisha carry on the way home?</p></div>
+    <textarea rows="1" maxlength="70" aria-label="Answer for question 10" id="a10" placeholder="Your short answer…" spellcheck="false" autocomplete="off"></textarea></div>
     </div>
-    <div class="actions">
-      <button class="ghost" id="copy">Copy my answers</button>
-      <button class="ghost" id="print">Print / Save as PDF</button>
-      <button class="ghost" id="clear">Clear my answers</button>
+    <div class="extra-tools" aria-label="Additional answer tools">
+      <button type="button" id="copy">Copy my answers</button>
+      <button type="button" id="print">Print / Save as PDF</button>
     </div>
-    <div class="colophon">
-      Banglay IELTS &amp; Immigration Center &middot; Sylhet<br>
-      30 Days &middot; 30 Passages &mdash; Reading Practice Bank<br>
-      Developed by A.I.Tanim, IELTS Trainer
-    </div>
-  </section>
+</section>
 
 </div>
 
-<div class="bar">
-  <span class="count" id="count"></span>
-  <button class="primary" id="go" disabled>Reveal model answers</button>
+<div class="bar" aria-label="Submission actions">
+  <span class="count" id="count" aria-live="polite"><b>0 / 10</b> answered</span>
+  <div class="footer-actions">
+    <button class="primary" type="button" id="go">Submit &amp; Review</button>
+    <button class="ghost" type="button" id="save-jpg" disabled title="Submit your work to enable JPG download">Save My Result as JPG</button>
+    <button class="ghost" type="button" id="clear">Clear My Response</button>
+  </div>
 </div>
 
 <script>
 (function(){
 "use strict";
-var D="01",K="bi30:day"+D,T=90000,P=[252, 253, 242, 170, 87, 249, 191, 167, 150, 178, 103, 226, 69, 180, 56, 212, 240, 250, 131, 179, 157, 194, 255, 252, 193, 144, 131, 239, 230, 183, 71, 121],
-    B=document.getElementById("qs"),
-    A=[].slice.call(B.querySelectorAll("textarea")),
-    G=document.getElementById("go"),C=document.getElementById("count"),
-    t0=Date.now(),done=false;
-
-/* ---- tabs (narrow screens) ---- */
-var TP=document.getElementById("tab-p"),TQ=document.getElementById("tab-q"),
-    PP=document.getElementById("psg"),PQ=document.getElementById("qpane");
-function tab(q){
-  var narrow=window.matchMedia("(max-width:900px)").matches;
-  TQ.setAttribute("aria-selected",q?"true":"false");
-  TP.setAttribute("aria-selected",q?"false":"true");
-  PP.hidden=narrow&&q;PQ.hidden=narrow&&!q;
+const D="01", ANSWER_KEY="bi30:day"+D+":fixed:v3", META_KEY="bi30:day"+D+":student:v2", SUBMIT_KEY=ANSWER_KEY+":submitted", SETTINGS_KEY="bi30:display:v2", TIMER_KEY="bi30:day"+D+":timer:v2", ATTEMPT_KEY="bi30:day"+D+":attempts:v1", START_KEY="bi30:day"+D+":attemptStartedAt:v1";
+const P=[252,253,242,170,87,249,191,167,150,178,103,226,69,180,56,212,240,250,131,179,157,194,255,252,193,144,131,239,230,183,71,121];
+const $=id=>document.getElementById(id);
+const B=$("qs"), A=Array.from(B.querySelectorAll("textarea")), G=$("go"), C=$("count"), saveJpg=$("save-jpg"), nameInput=$("student-name"),batchInput=$("student-batch"), dateInput=$("submission-date");
+const TP=$("tab-p"), TQ=$("tab-q"), PP=$("psg"),PQ=$("qpane");
+let done=false, submitted=null, modelData=null, countCache=-1;
+const read=(key, fallback)=>{try{const x=localStorage.getItem(key);return x===null?fallback:JSON.parse(x)}catch(_){return fallback}};
+const store=(key,val)=>{try{localStorage.setItem(key,JSON.stringify(val))}catch(_){/* Private mode or disabled storage */}};
+const clearStore=key=>{try{localStorage.removeItem(key)}catch(_){}};
+// Attempts are counted only on confirmed submissions; clearing the response starts a new attempt.
+// Browser-local records cannot be synchronised across devices or treated as exam-security logs.
+let totalAttempts=Math.max(0,Math.floor(Number(read(ATTEMPT_KEY,0))||0));
+let attemptStartedAt=Number(read(START_KEY,0))||0;
+if(!read(SUBMIT_KEY,null) && (!Number.isFinite(attemptStartedAt)||attemptStartedAt<=0||attemptStartedAt>Date.now())){
+  attemptStartedAt=Date.now();store(START_KEY,attemptStartedAt);
 }
-TP.addEventListener("click",function(){tab(false)});
-TQ.addEventListener("click",function(){tab(true)});
-window.addEventListener("resize",function(){
-  if(!window.matchMedia("(max-width:900px)").matches){PP.hidden=false;PQ.hidden=false}
-  else tab(TQ.getAttribute("aria-selected")==="true");
-});
+const localDay=(d)=>{const date=d||new Date(),p=n=>String(n).padStart(2,"0");return date.getFullYear()+"-"+p(date.getMonth()+1)+"-"+p(date.getDate())};
+const safeText=s=>String(s==null?"":s);
+const answerCount=()=>A.filter(x=>x.value.trim()!=="").length;
+function unpack(s){const a=atob(s),o=new Uint8Array(a.length);for(let i=0;i<a.length;i++)o[i]=a.charCodeAt(i)^P[i%P.length];return JSON.parse(new TextDecoder().decode(o))}
+function getModels(){if(!modelData)modelData=unpack(B.dataset.k);return modelData}
+function tab(q){
+  const narrow=window.matchMedia("(max-width:720px)").matches;
+  TQ.setAttribute("aria-selected",q?"true":"false");TP.setAttribute("aria-selected",q?"false":"true");
+  PP.hidden=narrow&&q; PQ.hidden=narrow&&!q;
+}
+TP.addEventListener("click",()=>tab(false));TQ.addEventListener("click",()=>tab(true));
+window.addEventListener("resize",()=>{if(!window.matchMedia("(max-width:720px)").matches){PP.hidden=false;PQ.hidden=false}else tab(TQ.getAttribute("aria-selected")==="true")});
 tab(false);
 
-/* ---- saved work ---- */
-try{var v=JSON.parse(localStorage.getItem(K)||"[]");
-    A.forEach(function(x,i){if(v[i])x.value=v[i]});}catch(e){}
-function save(){try{localStorage.setItem(K,JSON.stringify(A.map(function(x){return x.value})))}catch(e){}}
-
-function tick(){
-  if(done)return;
-  var n=A.filter(function(x){return x.value.trim().length>0}).length,
-      left=Math.ceil((T-(Date.now()-t0))/1000);
-  if(n<A.length){C.innerHTML="<b>"+n+" / "+A.length+"</b> answered";G.disabled=true}
-  else if(left>0){C.innerHTML="<b>All "+A.length+" answered</b> &mdash; available in "+left+"s";G.disabled=true}
-  else{C.innerHTML="<b>All "+A.length+" answered</b> &mdash; ready to check";G.disabled=false}
+// v3 answers have their own storage key, preventing old open-ended answers from being misgraded.
+const previous=read(ANSWER_KEY,[]);
+if(Array.isArray(previous))A.forEach((x,i)=>{x.value=typeof previous[i]==="string"?previous[i]:""});
+function saveAnswers(){store(ANSWER_KEY,A.map(x=>x.value))}
+function saveIdentity(){store(META_KEY,{name:nameInput.value,batch:batchInput.value})}
+const identity=read(META_KEY,{});
+nameInput.value=safeText(identity.name);batchInput.value=safeText(identity.batch);dateInput.value=localDay();
+[nameInput,batchInput].forEach(x=>x.addEventListener("input",saveIdentity));
+function updateCount(){
+  const n=answerCount(),total=A.length;
+  C.innerHTML=done&&submitted?"<b>Score "+gradeAnswers(submitted.answers).score+" / "+total+"</b> · "+n+" / "+total+" answered":"<b>"+n+" / "+total+"</b> answered";
+  countCache=n;
 }
-A.forEach(function(x){x.addEventListener("input",function(){save();tick()})});
-setInterval(tick,1000);tick();
+A.forEach((x,i)=>{
+  x.addEventListener("input",()=>{saveAnswers();updateCount()});
+  x.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();if(A[i+1])A[i+1].focus()}});
+});
 
-/* ---- the key is XOR-scrambled so it is not readable in the source ---- */
-function unpack(s){
-  var a=atob(s),o=new Uint8Array(a.length),i=0;
-  for(;i<a.length;i++)o[i]=a.charCodeAt(i)^P[i%P.length];
-  return JSON.parse(new TextDecoder().decode(o));
+// Persist zoom, theme and splitter width in this browser.
+const settings=read(SETTINGS_KEY,{});
+let zoom=Math.min(1.5,Math.max(.8,Number(settings.zoom)||1));
+let passageWidth=Math.min(72,Math.max(28,Number(settings.passageWidth)||50));
+let dark=!!settings.dark;
+function applySettings(){
+  document.documentElement.style.setProperty("--zoom",zoom.toFixed(2));
+  document.documentElement.style.setProperty("--passage-width",passageWidth.toFixed(2)+"%");
+  $("split-divider").setAttribute("aria-valuenow",String(Math.round(passageWidth)));
+  document.body.classList.toggle("dark",dark);
+  $("theme-symbol").textContent=dark?"☀":"☾";
+  $("theme-toggle").setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");
 }
+function persistSettings(){store(SETTINGS_KEY,{zoom,passageWidth,dark})}
+$("zoom-in").addEventListener("click",()=>{zoom=Math.min(1.5,Math.round((zoom+.1)*100)/100);applySettings();persistSettings()});
+$("zoom-out").addEventListener("click",()=>{zoom=Math.max(.8,Math.round((zoom-.1)*100)/100);applySettings();persistSettings()});
+$("theme-toggle").addEventListener("click",()=>{dark=!dark;applySettings();persistSettings()});
+const divider=$("split-divider"),split=document.querySelector(".split");
+function setPassageWidth(v){passageWidth=Math.min(72,Math.max(28,v));applySettings();persistSettings()}
+let dragging=false;
+divider.addEventListener("pointerdown",e=>{if(e.button!==0&&e.pointerType==="mouse")return;dragging=true;divider.classList.add("dragging");divider.setPointerCapture(e.pointerId);e.preventDefault()});
+divider.addEventListener("pointermove",e=>{if(!dragging)return;const r=split.getBoundingClientRect();if(r.width>0)setPassageWidth((e.clientX-r.left-5)/r.width*100)});
+function finishDrag(){dragging=false;divider.classList.remove("dragging")}
+divider.addEventListener("pointerup",finishDrag);divider.addEventListener("pointercancel",finishDrag);
+divider.addEventListener("lostpointercapture",finishDrag);
+divider.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();setPassageWidth(passageWidth+(e.key==="ArrowRight"?2:-2))}else if(e.key==="Home"){e.preventDefault();setPassageWidth(28)}else if(e.key==="End"){e.preventDefault();setPassageWidth(72)}});
+applySettings();
 
-G.addEventListener("click",function(){
-  var r;
-  try{r=unpack(B.dataset.k)}
-  catch(e){C.textContent="Could not open the answer key in this browser.";return}
-  done=true;G.disabled=true;
-  r.a.forEach(function(text,i){
-    var d=document.createElement("div");d.className="model";
-    var b=document.createElement("b");b.textContent="Model answer";
-    var p=document.createElement("p");p.textContent=text;
-    d.appendChild(b);d.appendChild(p);
-    A[i].parentNode.appendChild(d);A[i].disabled=true;
+// Time controls: manual stopwatch and optional countdown, all in browser-local JS.
+const timerArea=$("timer-area"),timerButton=$("timer-button"),timerPanel=$("timer-panel"),timerMode=$("timer-mode"),timerStart=$("timer-start"),timerReset=$("timer-reset");
+let ts=read(TIMER_KEY,{});
+let timer={mode:[0,600,1200,1800,3600].includes(Number(ts.mode))?Number(ts.mode):0,elapsed:Math.max(0,Number(ts.elapsed)||0),running:!!ts.running,startedAt:Number(ts.startedAt)||Date.now()};
+if(done)timer.running=false;
+function elapsed(){return timer.elapsed+(timer.running?Math.max(0,Date.now()-timer.startedAt):0)}
+function persistTimer(){store(TIMER_KEY,timer)}
+function pauseTimer(){if(timer.running){timer.elapsed=elapsed();timer.running=false;timer.startedAt=Date.now();persistTimer()}}
+function fmtTime(t){t=Math.max(0,Math.floor(t/1000));const p=n=>String(n).padStart(2,"0");return t>=3600?p(Math.floor(t/3600))+":"+p(Math.floor(t/60)%60)+":"+p(t%60):p(Math.floor(t/60))+":"+p(t%60)}
+function shownMs(){const e=elapsed();return timer.mode?Math.max(0,timer.mode*1000-e):e}
+function updateTimer(){
+  if(timer.mode&&timer.running&&elapsed()>=timer.mode*1000){timer.elapsed=timer.mode*1000;timer.running=false;persistTimer()}
+  const display=fmtTime(shownMs());$("timer-chip").textContent=display;$("timer-large").textContent=display;
+  $("timer-state").textContent=done?"Submitted":timer.mode&&shownMs()===0&&elapsed()>0?"Time's up":timer.running?"Running":"Paused";
+  timerStart.textContent=timer.running?"Pause":"Start";
+  timerStart.disabled=done||(timer.mode>0&&shownMs()===0&&elapsed()>0);
+  timerReset.disabled=done;
+  timerMode.disabled=done;
+}
+timerMode.value=String(timer.mode);
+timerButton.addEventListener("click",()=>{const open=timerPanel.hidden;timerPanel.hidden=!open;timerButton.setAttribute("aria-expanded",String(open));updateTimer()});
+document.addEventListener("pointerdown",e=>{if(!timerArea.contains(e.target)){timerPanel.hidden=true;timerButton.setAttribute("aria-expanded","false")}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){timerPanel.hidden=true;timerButton.setAttribute("aria-expanded","false")}});
+timerMode.addEventListener("change",()=>{timer.mode=Number(timerMode.value);timer.elapsed=0;timer.running=false;timer.startedAt=Date.now();persistTimer();updateTimer()});
+timerStart.addEventListener("click",()=>{if(done)return;if(timer.running)pauseTimer();else{timer.startedAt=Date.now();timer.running=true;persistTimer()}updateTimer()});
+timerReset.addEventListener("click",()=>{timer.elapsed=0;timer.running=false;timer.startedAt=Date.now();persistTimer();updateTimer()});
+setInterval(updateTimer,250);updateTimer();
+
+// Auto-grading: 1 point per answer. Only deliberate accepted variants are marked correct.
+function normalise(value){return safeText(value).normalize("NFKC").toLowerCase().trim().replace(/[.,!?;:]+/g," ").replace(/\s+/g," ").trim()}
+function withinWordLimit(value){
+  const words=safeText(value).trim().replace(/[.,!?;:]+/g," ").split(/\s+/).filter(Boolean);
+  if(!words.length)return false;
+  const numerals=words.filter(w=>/^\d+(?:[.]\d+)?$/.test(w)).length;
+  return numerals<=1&&(words.length-numerals)<=2;
+}
+function gradeAnswers(values){
+  const r=getModels();
+  const details=Array.from({length:A.length},(_,i)=>{
+    const value=safeText(values[i]).trim(),answered=value!=="",inLimit=withinWordLimit(value);
+    const accepted=r.v[i].some(v=>normalise(v)===normalise(value));
+    return {answered,inLimit,correct:answered&&inLimit&&accepted};
   });
-  var n=document.createElement("div");n.className="note";
-  var nb=document.createElement("b");nb.textContent="Check your own work. ";
-  n.appendChild(nb);n.appendChild(document.createTextNode(r.g));
-  B.parentNode.insertBefore(n,B);
-  C.innerHTML="<b>Model answers shown</b> &mdash; compare and mark your own gaps";
-  G.textContent="Answers revealed";
-  tab(true);n.scrollIntoView({behavior:"smooth",block:"center"});
+  return {score:details.filter(x=>x.correct).length,details};
+}
+function makeReview(s){
+  const r=getModels(),grading=gradeAnswers(s.answers);
+  B.querySelectorAll(".model").forEach(x=>x.remove());
+  B.querySelectorAll(".q").forEach(x=>x.classList.remove("correct","incorrect"));
+  r.a.forEach((answer,i)=>{
+    const result=grading.details[i],q=A[i].closest(".q");
+    q.classList.add(result.correct?"correct":"incorrect");
+    const d=document.createElement("div");d.className="model "+(result.correct?"correct":"incorrect");
+    const b=document.createElement("b");b.textContent=result.correct?"✓ Correct · 1 mark":result.answered?"✗ Incorrect · 0 marks":"— Not answered · 0 marks";
+    const p=document.createElement("p");p.textContent="Correct answer: "+answer;
+    d.append(b,p);
+    if(result.answered&&!result.inLimit){const why=document.createElement("p");why.className="grading-reason";why.textContent="Your answer exceeds the stated word limit.";d.appendChild(why)}
+    q.appendChild(d);A[i].disabled=true;
+  });
+  const banner=$("review-banner");banner.replaceChildren();
+  const h=document.createElement("strong");h.textContent="Submitted — Automatic marking complete";
+  const score=document.createElement("div");score.className="result-score";score.textContent="Score: "+grading.score+" / "+A.length+" ("+Math.round(grading.score/A.length*100)+"%)";
+  const line=document.createElement("div");line.className="review-details";
+  const dt=new Date(s.submittedAt);
+  line.textContent=s.name+" · Batch: "+s.batch+" · "+(Number.isNaN(dt.getTime())?s.date:dt.toLocaleString())+" · "+s.answered+"/"+A.length+" answered";
+  const note=document.createElement("div");note.textContent="Green = correct; red = incorrect / unanswered. Answers exceeding TWO WORDS AND/OR A NUMBER are incorrect. You can download the scored JPG below.";
+  banner.append(h,score,line,note);banner.hidden=false;
+  done=true;G.disabled=true;G.textContent="Submitted & Reviewed";
+  nameInput.readOnly=true;batchInput.readOnly=true;
+  saveJpg.disabled=false;saveJpg.title="Download your graded result as JPG";
+  updateCount();updateTimer();
+}
+function validateStudent(){
+  if(!nameInput.value.trim()){alert("Please enter the student's name before submitting.");nameInput.focus();return false}
+  if(!batchInput.value.trim()){alert("Please enter the batch before submitting.");batchInput.focus();return false}
+  return true;
+}
+G.addEventListener("click",()=>{
+  if(done||!validateStudent())return;
+  const n=answerCount(),total=A.length;
+  const msg=n===0?"You have not answered any questions. Submit this blank test for review?":n<total?"You answered "+n+" out of "+total+" questions. Submit anyway? Your answers will be locked until you clear your response.":"Submit all "+total+" answers for review? They will be locked until you clear your response.";
+  if(!window.confirm(msg))return;
+  try{getModels()}catch(e){alert("The answer key could not be opened in this browser. Your work has not been submitted.");return}
+  pauseTimer();
+  const now=new Date();dateInput.value=localDay(now);
+  // Real time taken is measured from starting this attempt to submitting, independent of the optional timer.
+  const started=(attemptStartedAt>0&&attemptStartedAt<=now.getTime())?attemptStartedAt:now.getTime();
+  totalAttempts+=1;
+  submitted={name:nameInput.value.trim(),batch:batchInput.value.trim(),date:dateInput.value,submittedAt:now.toISOString(),answered:n,answers:A.map(x=>x.value),timerMode:timer.mode,timerElapsedMs:Math.round(elapsed()),attempt:totalAttempts,timeTakenMs:now.getTime()-started};
+  saveIdentity();saveAnswers();store(ATTEMPT_KEY,totalAttempts);store(SUBMIT_KEY,submitted);
+  clearStore(START_KEY);attemptStartedAt=0;
+  makeReview(submitted);
+  tab(true);$("review-banner").scrollIntoView({behavior:"smooth",block:"nearest"});
 });
 
-/* ---- utilities ---- */
-document.getElementById("copy").addEventListener("click",function(){
-  var Q=B.querySelectorAll(".qt");
-  var out="Day "+D+" — A Day at the Market\n\n"+A.map(function(x,i){
-    return (i+1)+". "+Q[i].textContent.trim()+
-           "\n   "+(x.value.trim()||"(no answer)")}).join("\n\n");
-  navigator.clipboard.writeText(out).then(function(){
-    var b=document.getElementById("copy"),o=b.textContent;
-    b.textContent="Copied";setTimeout(function(){b.textContent=o},1600);
-  },function(){window.prompt("Copy your answers:",out)});
-});
-document.getElementById("print").addEventListener("click",function(){window.print()});
-document.getElementById("clear").addEventListener("click",function(){
-  if(!confirm("Clear all ten of your answers for Day "+D+"?"))return;
-  A.forEach(function(x){x.value=""});save();tick();
+// Restore an already-submitted review if this HTML is reopened on the same browser.
+const old=read(SUBMIT_KEY,null);
+if(old&&Array.isArray(old.answers)&&old.answers.length===A.length){
+  // Assign an attempt number to submissions from earlier Day01 builds without double-counting reloads.
+  if(!Number.isInteger(old.attempt)||old.attempt<1){old.attempt=Math.max(1,totalAttempts);store(SUBMIT_KEY,old)}
+  totalAttempts=Math.max(totalAttempts,old.attempt);store(ATTEMPT_KEY,totalAttempts);
+  submitted=old;
+  A.forEach((x,i)=>{x.value=safeText(old.answers[i])});
+  nameInput.value=safeText(old.name);batchInput.value=safeText(old.batch);dateInput.value=old.date||localDay(new Date(old.submittedAt));
+  pauseTimer();try{makeReview(old)}catch(_){done=false;submitted=null;clearStore(SUBMIT_KEY)}
+}
+updateCount();
+
+$("clear").addEventListener("click",()=>{
+  if(!window.confirm("Clear all 10 responses and reset this Day 01 submission? Your student name and batch will be kept."))return;
+  done=false;submitted=null;clearStore(SUBMIT_KEY);
+  // Keep lifetime attempt count; a cleared test is a new timed attempt.
+  attemptStartedAt=Date.now();store(START_KEY,attemptStartedAt);
+  A.forEach(x=>{x.value="";x.disabled=false;x.closest(".q").classList.remove("correct","incorrect")});
+  B.querySelectorAll(".model").forEach(x=>x.remove());
+  $("review-banner").replaceChildren();$("review-banner").hidden=true;
+  nameInput.readOnly=false;batchInput.readOnly=false;dateInput.value=localDay();
+  G.disabled=false;G.textContent="Submit & Review";saveJpg.disabled=true;saveJpg.title="Submit your work to enable JPG download";
+  timer.elapsed=0;timer.running=false;timer.startedAt=Date.now();persistTimer();
+  saveAnswers();updateCount();updateTimer();tab(false);
 });
 
-/* ---- casual-snooping speed bumps ---- */
-document.addEventListener("contextmenu",function(e){e.preventDefault()});
-document.addEventListener("keydown",function(e){
-  var k=(e.key||"").toLowerCase();
-  if(k==="f12"||((e.ctrlKey||e.metaKey)&&(k==="u"||k==="s"))||
-     ((e.ctrlKey||e.metaKey)&&e.shiftKey&&"ijc".indexOf(k)>=0))e.preventDefault();
+// Retained from the original HTML as secondary utilities.
+$("copy").addEventListener("click",()=>{
+  const questions=B.querySelectorAll(".qt");
+  const out="Day "+D+" — A Day at the Market\nStudent: "+nameInput.value+"\nBatch: "+batchInput.value+"\n\n"+A.map((x,i)=>(i+1)+". "+questions[i].textContent.trim()+"\n   "+(x.value.trim()||"(no answer)")).join("\n\n");
+  const b=$("copy"),oldLabel=b.textContent;
+  const copied=()=>{b.textContent="Copied!";setTimeout(()=>b.textContent=oldLabel,1400)};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(out).then(copied,()=>window.prompt("Copy your answers:",out))}else window.prompt("Copy your answers:",out);
+});
+$("print").addEventListener("click",()=>window.print());
+
+// Offline, 1:1 JPG result card. Intentionally omits answers, marking breakdown and explanatory notes.
+function drawReport(s){
+  const grading=gradeAnswers(s.answers);
+  const W=1200,H=1200;
+  const canvas=document.createElement("canvas");canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext("2d");if(!ctx)throw Error("Canvas is unavailable");
+  const red="#C50C2F",ink="#202126",muted="#62656C",line="#E7DFE1",bg="#FFFFFF";
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle=red;ctx.fillRect(0,0,W,14);
+  ctx.textAlign="center";ctx.textBaseline="alphabetic";
+  ctx.fillStyle=red;ctx.font="bold 40px Arial";ctx.fillText("BANGLAY IELTS",W/2,112);
+  ctx.fillStyle=muted;ctx.font="bold 24px Arial";ctx.fillText("READING HOMEWORK  •  DAY 01",W/2,157);
+  ctx.fillStyle=line;ctx.fillRect(100,190,1000,2);
+
+  function roundedRect(x,y,w,h,r){
+    ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);
+    ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);
+    ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+  }
+  roundedRect(100,234,1000,410,34);ctx.fillStyle="#FDF2F4";ctx.fill();
+  ctx.textAlign="center";ctx.fillStyle=muted;ctx.font="bold 29px Arial";
+  ctx.fillText("YOUR SCORE",W/2,316);
+  ctx.fillStyle=red;ctx.font="bold 220px Arial";ctx.fillText(grading.score+"/"+A.length,W/2,542);
+  ctx.fillStyle=muted;ctx.font="24px Arial";ctx.fillText("IELTS READING PRACTICE",W/2,603);
+
+  const attempt=Number.isInteger(s.attempt)&&s.attempt>0?s.attempt:Math.max(1,totalAttempts);
+  const timeMs=Number(s.timeTakenMs);
+  const timeLabel=(s.timeTakenMs!==undefined&&Number.isFinite(timeMs))?fmtTime(timeMs)
+    :(Number(s.timerElapsedMs)>0?fmtTime(Number(s.timerElapsedMs)):"Not recorded");
+  const dtParts=safeText(s.date).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const readableDate=dtParts?Number(dtParts[3])+" "+months[Number(dtParts[2])-1]+" "+dtParts[1]:safeText(s.date);
+  const rows=[
+    ["Full Name",safeText(s.name)],
+    ["Batch ID",safeText(s.batch)],
+    ["Attempt",String(attempt)],
+    ["Time Taken",timeLabel],
+    ["Submission Date",readableDate]
+  ];
+  ctx.textBaseline="middle";
+  function fitFont(value,maxWidth,maxFont=35,minFont=23){
+    for(let fontSize=maxFont;fontSize>=minFont;fontSize--){
+      ctx.font="bold "+fontSize+"px Arial";
+      if(ctx.measureText(value).width<=maxWidth)return fontSize;
+    }
+    return minFont;
+  }
+  function breakLongText(value,maxWidth){
+    ctx.font="bold 25px Arial";
+    const tokens=value.split(/\s+/).filter(Boolean),lines=[];let current="";
+    for(const word of tokens){
+      const candidate=current?current+" "+word:word;
+      if(ctx.measureText(candidate).width<=maxWidth){current=candidate;continue}
+      if(current){lines.push(current);current=""}
+      if(ctx.measureText(word).width<=maxWidth){current=word;continue}
+      let part="";
+      for(const ch of word){if(part&&ctx.measureText(part+ch).width>maxWidth){lines.push(part);part=ch}else part+=ch}
+      current=part;
+    }
+    if(current)lines.push(current);
+    return lines;
+  }
+  const xLeft=144,xRight=1053,midY=707,rowH=82;
+  for(let i=0;i<rows.length;i++){
+    const y=midY+i*rowH;
+    if(i){ctx.fillStyle=line;ctx.fillRect(xLeft,y-41,xRight-xLeft,1)}
+    ctx.textAlign="left";ctx.font="25px Arial";ctx.fillStyle=muted;ctx.fillText(rows[i][0],xLeft,y);
+    const value=rows[i][1];const width=627;
+    ctx.textAlign="right";ctx.fillStyle=ink;
+    const size=fitFont(value,width);
+    ctx.font="bold "+size+"px Arial";
+    if(ctx.measureText(value).width<=width){ctx.fillText(value,xRight,y)}
+    else{
+      const lines=breakLongText(value,width);
+      // Never truncate full names: long values wrap in the right-hand column.
+      const spacing=Math.min(24,60/Math.max(1,lines.length-1));
+      const startY=y-((lines.length-1)*spacing)/2;
+      ctx.font="bold 25px Arial";
+      for(let j=0;j<lines.length;j++)ctx.fillText(lines[j],xRight,startY+j*spacing);
+    }
+  }
+  ctx.textAlign="center";ctx.textBaseline="alphabetic";
+  ctx.fillStyle=line;ctx.fillRect(100,1133,1000,2);
+  ctx.fillStyle=muted;ctx.font="22px Arial";
+  ctx.fillText("DAY 01  •  PERSONAL RESULT",W/2,1172);
+  return canvas;
+}
+saveJpg.addEventListener("click",()=>{
+  if(!done||!submitted){alert("Please use Submit & Review first.");return}
+  try{
+    const canvas=drawReport(submitted),a=document.createElement("a");
+    if(canvas.width!==1200||canvas.height!==1200)throw Error("Result must be exactly 1200 × 1200 pixels.");
+    const safeName=submitted.name.normalize("NFKD").replace(/[^a-zA-Z0-9 _-]/g,"").trim().replace(/\s+/g,"_").slice(0,35)||"Student";
+    a.href=canvas.toDataURL("image/jpeg",.92);
+    a.download="Day01_"+safeName+"_"+submitted.date+".jpg";
+    document.body.appendChild(a);a.click();a.remove();
+  }catch(e){alert("Could not save JPG: "+e.message)}
 });
 })();
 </script>
